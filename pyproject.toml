@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "products-api"
+version = "0.1.0"
+description = ""
+authors = ["Meiryanne Martins <meirympereira@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["standard"], version = "^0.136.3"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
