@@ -2,7 +2,8 @@ from fastapi import APIRouter, status
 
 router = APIRouter()
 
-@router.get('/', status_code = status.HTTP_200_OK)
+
+@router.get('/', status_code=status.HTTP_200_OK)
 async def list_products():
     return {
         'products': [
@@ -19,5 +20,4 @@ async def list_products():
                 'name': 'SSD 1TB',
             },
         ]
-
     }
