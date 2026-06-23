@@ -1,1 +1,20 @@
+# Ambiente
 .env
+.venv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Poetry
+.poetry
+
+# Alembic
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/

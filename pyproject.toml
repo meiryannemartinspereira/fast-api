@@ -13,6 +13,8 @@ sqlalchemy = {extras = ["asyncio"], version = "^2.0.50"}
 aiosqlite = "^0.22.1"
 pydantic-settings = "^2.14.1"
 alembic = "^1.18.4"
+psycopg2-binary = "^2.9.12"
+asyncpg = "^0.31.0"
 
 
 [tool.poetry.group.dev.dependencies]
