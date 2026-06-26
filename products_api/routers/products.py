@@ -1,8 +1,41 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Depends, status
 
-from products_api.schemas.products import ProductListPublicSchema
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from products_api.core.database import get_session
+from products_api.models.products import Product
+
+from products_api.schemas.products import (
+    ProductListPublicSchema,
+    ProductPublicSchema,
+    ProductSchema
+)
 
 router = APIRouter()
+
+@router.post(
+        path='/',
+        status_code=status.HTTP_201_CREATED,
+        response_model=ProductPublicSchema,
+        summary='Criar novo produto',
+)
+
+async def create_product(
+    product: ProductSchema,
+    db: AsyncSession = Depends(get_session),
+
+):
+    db_product = Product(
+        name=product.name,
+        price=product.price,
+        description=product.description,
+    )
+
+    db.add(db_product)
+    await db.commit()
+    await db.refresh(db_product)
+
+    return db_product
 
 
 @router.get(
