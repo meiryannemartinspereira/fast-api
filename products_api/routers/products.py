@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
+
+from sqlalchemy import exists, select
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -25,6 +27,15 @@ async def create_product(
     db: AsyncSession = Depends(get_session),
 
 ):
+    name_exists = await db.scalar(
+        select(exists().where(Product.name == product.name))
+    )
+
+    if name_exists:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail='name exists'
+        )
     db_product = Product(
         name=product.name,
         price=product.price,
